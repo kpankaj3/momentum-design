@@ -1,5 +1,5 @@
 import { css } from 'lit';
-import { hostFitContentStyles, hostFocusRingStyles } from '../../utils/styles';
+import { hostFitContentStyles } from '../../utils/styles';
 
 const styles = [hostFitContentStyles, css`
 
@@ -17,18 +17,40 @@ const styles = [hostFitContentStyles, css`
     --mdc-link-inverted-color-normal: var(--mds-color-theme-inverted-text-accent-normal);
     --mdc-link-text-decoration-disabled: underline;
 
-    border-radius: var(--mdc-link-border-radius);
     color: var(--mdc-link-color-normal);
   }
 
   ::slotted(a) {
     align-items: center;
+    border-radius: var(--mdc-link-border-radius);
     color: inherit;
     display: flex;
     gap: var(--mdc-link-icon-margin-left);
     text-decoration: inherit;
     text-underline-offset: auto;
     text-underline-position: from-font;
+  }
+
+  ::slotted(a:focus-visible) {
+    outline: none;
+  }
+
+  ::slotted(a:focus) {
+    position: relative;
+    box-shadow: 0 0 0 0.125rem var(--mds-color-theme-focus-default-0),
+                0 0 0 0.25rem var(--mds-color-theme-focus-default-1),
+                0 0 0 0.3125rem var(--mds-color-theme-focus-default-2);
+  }
+
+  /* High Contrast Mode */
+  @media (forced-colors: active) {
+    ::slotted(a:focus-visible), ::slotted(a:focus) {
+      outline: 0.125rem solid var(--mds-color-theme-focus-default-0);
+    }
+  }
+
+  :host(:focus-visible), :host(:focus) {
+    outline: none;
   }
 
   :host(:hover) {
@@ -112,6 +134,6 @@ const styles = [hostFitContentStyles, css`
   :host([inverted][disabled]) {
     color: var(--mdc-link-inverted-color-disabled);
   }
-`, ...hostFocusRingStyles()];
+`];
 
 export default styles;
