@@ -463,8 +463,8 @@ class Popover extends DataAriaLabelMixin(DataAriaLabelledbyMixin(DataAriaDescrib
         document.addEventListener('keydown', this.onEscapeKeydown);
       }
 
-      this.triggerElement.setAttribute('aria-expanded', 'true');
       if (this.interactive) {
+        this.triggerElement.setAttribute('aria-expanded', 'true');
         this.triggerElement.setAttribute(
           'aria-haspopup',
           this.triggerElement.getAttribute('aria-haspopup') || 'dialog',
@@ -485,8 +485,8 @@ class Popover extends DataAriaLabelMixin(DataAriaLabelledbyMixin(DataAriaDescrib
       }
 
       this.deactivateFocusTrap?.();
-      this.triggerElement.removeAttribute('aria-expanded');
       if (this.interactive) {
+        this.triggerElement.removeAttribute('aria-expanded');
         this.triggerElement.removeAttribute('aria-haspopup');
       }
       if (this.focusBackToTrigger) {
