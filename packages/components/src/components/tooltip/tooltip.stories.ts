@@ -13,8 +13,20 @@ import { COLOR, DEFAULTS as POPOVER_DEFAULTS, POPOVER_PLACEMENT } from '../popov
 import { DEFAULTS, TOOLTIP_TYPES } from './tooltip.constants';
 
 const render = (args: Args) => html`
+  <script>
+    function removeTrigger() {
+      console.log('Removing trigger element with ID: ${args.triggerID}');
+      const trigger = document.getElementById('${args.triggerID}');
+      if (trigger) {
+        trigger.remove();
+        console.log('Trigger element removed');
+      } else {
+        console.warn('Trigger element not found');
+      }
+    }
+  </script>
   <div style="margin: 100px;">
-    <mdc-button id="${args.triggerID}">Hover here</mdc-button>
+    <mdc-button id="${args.triggerID}" onclick="removeTrigger()">Hover here (click to delete this button)</mdc-button>
     <mdc-tooltip
       color="${args.color}"
       delay="${args.delay}"
